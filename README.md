@@ -1,5 +1,7 @@
 # Lua Errs Utils
-<hr/>
+
+## Requirements
+1. Lua 5.1
 
 ## About
 
@@ -10,19 +12,19 @@ The following example demonstrates the use case:
 ```lua
 local utils = require("lua-errs-utils")
 
--- We have a variable to hold the result of a computation done
--- inside a `pcall()`
+-- We have a variable to hold the result
+-- of a computation done inside a `pcall()`
 local computed_var = nil
 
--- Here we use `pcall()` to get a success status and a possible result
--- from an operation that might err
+-- Here we use `pcall()` to get a success status and 
+-- a possible result from an operation that might err
 local success, diagnostic = pcall(function()
     computed_var = operation_that_can_err    
 end)
 
--- We can then get a result and err variables, that can be used
--- to proceed with the aplication or decide on how to handle the error
-result, err = utils.handle_res(computed_var, success, diagnostic)
+-- We can then get a result and err variables, that can be used to
+-- proceed with the aplication or decide on how to handle the error
+local result, err = utils.handle_res(computed_var, success, diagnostic)
 ```
 
 Among the other utils we have:
@@ -33,12 +35,9 @@ Among the other utils we have:
 All of those functions return the `result` (which can be `nil` in case of errors) and the `error`, which will be `nil` if the function succeeds.
 
 ## Reasoning
-Lua already has its own error handling syntax, this utility merely provides a method to reinforce error handling without the need of littering the codebase with `if not x then err else y end`. It's also a good pattern to help remember to actually deal with the errors, rather than waiting for them to happen before eventually handling them.
+Lua already has its own error handling syntax, this utility merely provides a method to reinforce error handling without the need for littering the codebase with `if not x then err else y end`. It's also a good pattern to help remember to actually deal with the errors, rather than waiting for them to happen before eventually handling them.
 
 Also, it's a pattern I enjoy using, so why not?
-
-## Requirements
-1. Lua 5.1
 
 ## To-Do
 Lots of things, and I'm taking suggestions.
